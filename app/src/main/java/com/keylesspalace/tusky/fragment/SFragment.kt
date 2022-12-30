@@ -66,8 +66,6 @@ import com.keylesspalace.tusky.view.showMuteAccountDialog
 import com.keylesspalace.tusky.viewdata.AttachmentViewData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import kotlinx.coroutines.launch
-import java.lang.IllegalStateException
-import java.util.LinkedHashSet
 import javax.inject.Inject
 import kotlin.concurrent.thread
 
@@ -337,7 +335,9 @@ abstract class SFragment : Fragment(), Injectable {
     private fun onMute(accountId: String, accountUsername: String) {
 
         showMuteAccountDialog(this.requireActivity(), accountUsername) { notifications: Boolean?, duration: Int? ->
-            timelineCases.mute(accountId, notifications == true, duration)
+            lifecycleScope.launch {
+                timelineCases.mute(accountId, notifications == true, duration)
+            }
         }
     }
 
@@ -345,7 +345,9 @@ abstract class SFragment : Fragment(), Injectable {
         AlertDialog.Builder(requireContext())
             .setMessage(getString(R.string.dialog_block_warning, accountUsername))
             .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
-                timelineCases.block(accountId)
+                lifecycleScope.launch {
+                    timelineCases.block(accountId)
+                }
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
