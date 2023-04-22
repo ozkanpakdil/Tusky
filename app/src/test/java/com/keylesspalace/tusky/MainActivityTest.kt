@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.work.testing.WorkManagerTestInitHelper
 import at.connyduck.calladapter.networkresult.NetworkResult
 import com.keylesspalace.tusky.appstore.EventHub
+import com.keylesspalace.tusky.components.accountlist.AccountListActivity
 import com.keylesspalace.tusky.components.notifications.NotificationHelper
 import com.keylesspalace.tusky.db.AccountEntity
 import com.keylesspalace.tusky.entity.Account
@@ -42,7 +43,7 @@ class MainActivityTest {
         note = "",
         url = "",
         avatar = "",
-        header = "",
+        header = ""
     )
     private val accountEntity = AccountEntity(
         id = 1,
@@ -103,7 +104,7 @@ class MainActivityTest {
                         avatar = "https://mastodon.example/system/accounts/avatars/000/150/486/original/ab27d7ddd18a10ea.jpg"
                     ),
                     status = null,
-                    report = null,
+                    report = null
                 ),
                 accountEntity,
                 true

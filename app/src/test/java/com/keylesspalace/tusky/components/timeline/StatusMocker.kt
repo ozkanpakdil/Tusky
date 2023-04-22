@@ -54,6 +54,7 @@ fun mockStatus(
     poll = null,
     card = null,
     language = null,
+    filtered = null
 )
 
 fun mockStatusViewData(
@@ -92,26 +93,26 @@ fun mockStatusEntityWithAccount(
     val mockedStatus = mockStatus(id)
     val gson = Gson()
 
-    return TimelineStatusWithAccount().apply {
+    return TimelineStatusWithAccount(
         status = mockedStatus.toEntity(
             timelineUserId = userId,
             gson = gson,
             expanded = expanded,
             contentShowing = false,
             contentCollapsed = true
-        )
+        ),
         account = mockedStatus.account.toEntity(
             accountId = userId,
             gson = gson
         )
-    }
+    )
 }
 
 fun mockPlaceholderEntityWithAccount(
     id: String,
-    userId: Long = 1,
+    userId: Long = 1
 ): TimelineStatusWithAccount {
-    return TimelineStatusWithAccount().apply {
+    return TimelineStatusWithAccount(
         status = Placeholder(id, false).toEntity(userId)
-    }
+    )
 }
